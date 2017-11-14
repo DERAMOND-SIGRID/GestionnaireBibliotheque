@@ -1,7 +1,5 @@
 package fr.afpa.GestionnaireBibliothequeGitHubSigrid;
 
-
-
 /**
  * Hello world!
  *
