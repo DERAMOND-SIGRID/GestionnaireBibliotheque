@@ -1,6 +1,7 @@
 package fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO;
 
 import java.util.ArrayList;
+
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Categorie;
 
 public interface IDAOCategorie {
