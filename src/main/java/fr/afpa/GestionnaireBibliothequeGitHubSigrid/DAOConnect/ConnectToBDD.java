@@ -11,13 +11,13 @@ public class ConnectToBDD {
 		
 		//Load Driver
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
 		//url BDD
-		String urlBDD="jdbc:mysql://localhost:3306/bibliotheque";
+		String urlBDD="jdbc:mysql://localhost:3306/bibliotheque?serverTimezone=UTC";
 		
 		//count name BDD
 		String countNameBDD="root";
