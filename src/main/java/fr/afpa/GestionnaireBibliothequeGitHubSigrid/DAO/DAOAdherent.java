@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAOConnect.ConnectToBDD;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Adherent;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Auteur;
 
 public class DAOAdherent implements IDAOAdherent{
 
@@ -79,6 +80,63 @@ public class DAOAdherent implements IDAOAdherent{
 		return myarray;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	
+	public Adherent getOneById(int id_adherent){
+		connect();
+		
+		Adherent myadherent=null;
+		
+		myrequest="select personne.id_personne, nom_personne, prenom_personne, nb_emprunt_max from personne, adherent where personne.id_personne=adherent.id_personne and adherent.id_adherent="+id_adherent+";";
+		
+		try {
+			myresult = mystate.executeQuery(myrequest);
+
+			while (myresult.next()) {
+				int idP=myresult.getInt("personne.id_personne");
+				String nom=myresult.getString("nom_personne");
+				String prenom=myresult.getString("prenom_personne");
+				int nbEmpruntMax=myresult.getInt("nb_emprunt_max");;
+				
+				myadherent=new Adherent(idP, nom, prenom, id_adherent, nbEmpruntMax);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		disconnect();
+		
+		return myadherent;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	
+	public Adherent getOneByInfo(String nom, String prenom){
+		connect();
+		
+		Adherent myadherent=null;
+		
+		myrequest="select personne.id_personne, adherent.id_adherent, nb_emprunt_max from personne, adherent where personne.id_personne=adherent.id_personne and nom_personne='"+nom+"' and prenom_personne='"+prenom+"';";
+		
+		try {
+			myresult = mystate.executeQuery(myrequest);
+
+			while (myresult.next()) {
+				int idP=myresult.getInt("personne.id_personne");
+				int idAd=myresult.getInt("adherent.id_adherent");
+				int nbEmpruntMax=myresult.getInt("nb_emprunt_max");;
+				
+				myadherent=new Adherent(idP, nom, prenom, idAd, nbEmpruntMax);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		disconnect();
+		
+		return myadherent;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 
 	public void add(String nom, String prenom,int nbEmpruntMax) {

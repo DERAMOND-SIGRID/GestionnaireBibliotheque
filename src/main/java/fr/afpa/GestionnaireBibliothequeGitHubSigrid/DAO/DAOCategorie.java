@@ -105,7 +105,7 @@ public class DAOCategorie implements IDAOCategorie {
 	/////////////////////////////////////////////////////////////////
 
 	public Categorie getOneByInfo(String nom_categorie) {
-connect();
+		connect();
 		
 		Categorie mycategorie=null;
 		

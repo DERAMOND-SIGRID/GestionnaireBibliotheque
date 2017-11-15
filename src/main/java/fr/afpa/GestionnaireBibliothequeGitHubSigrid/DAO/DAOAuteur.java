@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAOConnect.ConnectToBDD;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Auteur;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Categorie;
 
 public class DAOAuteur implements IDAOAuteur {
 
@@ -82,15 +83,58 @@ public class DAOAuteur implements IDAOAuteur {
 	/////////////////////////////////////////////////////////////////
 
 	public Auteur getOneById(int id_auteur) {
-		return null;
+		connect();
 		
+		Auteur myauteur=null;
+		
+		myrequest="select personne.id_personne, nom_personne, prenom_personne, date_naissance from personne, auteur where personne.id_personne=auteur.id_personne and auteur.id_auteur="+id_auteur+";";
+		
+		try {
+			myresult = mystate.executeQuery(myrequest);
+
+			while (myresult.next()) {
+				int idP=myresult.getInt("personne.id_personne");
+				String nom=myresult.getString("nom_personne");
+				String prenom=myresult.getString("prenom_personne");
+				String dateN=myresult.getString("date_naissance");
+				
+				myauteur=new Auteur(idP, nom, prenom, id_auteur, dateN);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		disconnect();
+		
+		return myauteur;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 
 	public Auteur getOneByInfo(String nom, String prenom, String dateNaissance) {
-		return null;
+		connect();
 		
+		Auteur myauteur=null;
+		
+		myrequest="select personne.id_personne, auteur.id_auteur from personne, auteur where personne.id_personne=auteur.id_personne and nom_personne='"+nom+"' and prenom_personne='"+prenom+"' and date_naissance='"+dateNaissance+"';";
+		
+		try {
+			myresult = mystate.executeQuery(myrequest);
+
+			while (myresult.next()) {
+				int idP=myresult.getInt("personne.id_personne");
+				int idAu=myresult.getInt("auteur.id_auteur");
+				
+				myauteur=new Auteur(idP, nom, prenom, idAu, dateNaissance);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		disconnect();
+		
+		return myauteur;
 	}
 	
 	/////////////////////////////////////////////////////////////////
