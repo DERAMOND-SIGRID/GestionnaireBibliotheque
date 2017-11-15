@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAOConnect.ConnectToBDD;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Categorie;
 
-public class DAOCategorie implements IDAOCategorie{
+public class DAOCategorie implements IDAOCategorie {
 
 	private Connection myconnect;
 	private Statement mystate;
 	private ResultSet myresult;
+	private String myrequest;
 
 	/////////////////////////////////////////////////////////////////
 
@@ -48,7 +49,7 @@ public class DAOCategorie implements IDAOCategorie{
 
 		ArrayList<Categorie> myarray = new ArrayList<Categorie>();
 
-		String myrequest = "select * from categorie;";
+		myrequest = "select * from categorie;";
 
 		try {
 			myresult = mystate.executeQuery(myrequest);
@@ -77,10 +78,62 @@ public class DAOCategorie implements IDAOCategorie{
 
 	/////////////////////////////////////////////////////////////////
 
+	public Categorie getOneById(int id_categorie) {
+		connect();
+		
+		Categorie mycategorie=null;
+		
+		myrequest="select nom_categorie from categorie where id_categorie="+id_categorie+";";
+		
+		try {
+			myresult = mystate.executeQuery(myrequest);
+
+			while (myresult.next()) {
+				String nomC=myresult.getString("nom_categorie");
+				
+				mycategorie=new Categorie(id_categorie, nomC);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		disconnect();
+		
+		return mycategorie;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+
+	public Categorie getOneByInfo(String nom_categorie) {
+		connect();
+		
+		Categorie mycategorie=null;
+		
+		myrequest="select id_categorie from categorie where nom_categorie='"+nom_categorie+"';";
+		
+		try {
+			myresult = mystate.executeQuery(myrequest);
+
+			while (myresult.next()) {
+				int idC=myresult.getInt("id_categorie");
+				
+				mycategorie=new Categorie(idC, nom_categorie);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		disconnect();
+		
+		return mycategorie;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+
 	public void add(String nom_categorie) {
 		connect();
 
-		String myrequest = "insert into categorie(nom_categorie) values('" + nom_categorie + "');";
+		myrequest = "insert into categorie(nom_categorie) values('" + nom_categorie + "');";
 
 		try {
 			mystate.executeUpdate(myrequest);
@@ -97,7 +150,7 @@ public class DAOCategorie implements IDAOCategorie{
 	public void update(int id_categorie, String newName) {
 		connect();
 
-		String myrequest = "update categorie set nom_categorie='" + newName + "' where id_categorie=" + id_categorie
+		myrequest = "update categorie set nom_categorie='" + newName + "' where id_categorie=" + id_categorie
 				+ ";";
 
 		try {
@@ -115,7 +168,7 @@ public class DAOCategorie implements IDAOCategorie{
 	public void remove(int id_categorie) {
 		connect();
 
-		String myrequest = "delete from categorie where id_categorie=" + id_categorie + ";";
+		myrequest = "delete from categorie where id_categorie=" + id_categorie + ";";
 
 		try {
 			mystate.executeUpdate(myrequest);
