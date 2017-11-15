@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAOConnect.ConnectToBDD;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Adherent;
-import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Auteur;
 
 public class DAOAdherent implements IDAOAdherent{
 

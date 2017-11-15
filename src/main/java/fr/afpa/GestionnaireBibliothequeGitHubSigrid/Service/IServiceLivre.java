@@ -24,4 +24,6 @@ public interface IServiceLivre {
 	
 	public void remove(long isbn);
 	
+	public boolean isLinkedToExemplaire(long isbn);
+	
 }

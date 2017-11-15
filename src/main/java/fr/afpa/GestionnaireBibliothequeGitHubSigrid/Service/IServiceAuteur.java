@@ -18,4 +18,6 @@ public interface IServiceAuteur {
 	
 	public void remove(int id_auteur);
 	
+	public boolean isLinkedToLivre(int id_auteur);
+	
 }

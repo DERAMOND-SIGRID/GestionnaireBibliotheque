@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAOConnect.ConnectToBDD;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Auteur;
-import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Categorie;
 
 public class DAOAuteur implements IDAOAuteur {
 

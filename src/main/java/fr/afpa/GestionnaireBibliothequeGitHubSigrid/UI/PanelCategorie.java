@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,13 +17,16 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class CategoriePanel extends JPanel{
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Controller.ControllerCategorie;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Categorie;
+
+public class PanelCategorie extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
 	private DefaultTableModel myTableModel;
 	
-	public CategoriePanel(){
+	public PanelCategorie(ControllerCategorie controller){
 		this.setOpaque(false);
 		this.setLayout(null);
 
@@ -129,7 +133,14 @@ public class CategoriePanel extends JPanel{
 		this.add(myBtRemove);
 
 		// init data
-		//ArrayList<Categorie> myarray=new ArrayList<Categorie>();
-		
+		ArrayList<Categorie> myarray=new ArrayList<Categorie>();
+		myarray=controller.getAll();
+		for(int i=1;i<myarray.size();i++) {
+			String nom=myarray.get(i).getNom_categorie();
+			
+			Object[] myobj= {nom};
+			
+			myTableModel.addRow(myobj);
+		}
 	}
 }
