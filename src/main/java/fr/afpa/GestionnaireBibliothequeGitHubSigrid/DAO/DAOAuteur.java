@@ -19,7 +19,7 @@ public class DAOAuteur implements IDAOAuteur {
 
 	/////////////////////////////////////////////////////////////////
 
-	public void connect() {
+	private void connect() {
 		myconnect = ConnectToBDD.getConnectToBDD();
 
 		try {
@@ -31,7 +31,7 @@ public class DAOAuteur implements IDAOAuteur {
 
 	/////////////////////////////////////////////////////////////////
 
-	public void disconnect() {
+	private void disconnect() {
 		try {
 			if (myresult != null) {
 				myresult.close();

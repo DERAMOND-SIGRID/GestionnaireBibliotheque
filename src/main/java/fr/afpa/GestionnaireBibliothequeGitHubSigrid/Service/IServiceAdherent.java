@@ -1,10 +1,10 @@
-package fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO;
+package fr.afpa.GestionnaireBibliothequeGitHubSigrid.Service;
 
 import java.util.ArrayList;
 
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Adherent;
 
-public interface IDAOAdherent {
+public interface IServiceAdherent {
 
 	public ArrayList<Adherent> getAll();
 	

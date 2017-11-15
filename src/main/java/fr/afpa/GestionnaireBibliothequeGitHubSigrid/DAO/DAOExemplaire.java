@@ -22,7 +22,7 @@ public class DAOExemplaire implements IDAOExemplaire {
 
 	/////////////////////////////////////////////////////////////////
 
-	public void connect() {
+	private void connect() {
 		myconnect = ConnectToBDD.getConnectToBDD();
 
 		try {
@@ -34,7 +34,7 @@ public class DAOExemplaire implements IDAOExemplaire {
 
 	/////////////////////////////////////////////////////////////////
 
-	public void disconnect() {
+	private void disconnect() {
 		try {
 			if (myresult != null) {
 				myresult.close();
