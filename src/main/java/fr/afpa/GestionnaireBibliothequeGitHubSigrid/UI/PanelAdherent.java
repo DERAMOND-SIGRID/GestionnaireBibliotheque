@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,29 +12,37 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class ReparationPanel extends JPanel{
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Controller.ControllerAdherent;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Adherent;
+
+public class PanelAdherent extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
 	private DefaultTableModel myTableModel;
 	
-	public ReparationPanel(){
+	public PanelAdherent(ControllerAdherent controller){
 		this.setOpaque(false);
 		this.setLayout(null);
-
-		JLabel myLbl = new JLabel();
+		
+		JTextField myTxtFieldEmpruntMax=new JTextField();;
+		myTxtFieldEmpruntMax.setText("00");
+		myTxtFieldEmpruntMax.setEditable(false);
+		
+		JLabel myLbl=new JLabel();
 		myLbl.setBounds(0, 0, 997, 30);
-		myLbl.setText("Réparations");
+		myLbl.setText("Adhérents");
 		myLbl.setHorizontalAlignment(JLabel.CENTER);
-
+		
 		this.add(myLbl);
-
-		JButton myBtAdd = new JButton();
+		
+		JButton myBtAdd=new JButton();
 		myBtAdd.setBounds(867, 60, 121, 29);
 		myBtAdd.setText("Ajouter");
 		myBtAdd.addActionListener(new ActionListener() {
@@ -41,26 +50,26 @@ public class ReparationPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				
 			}
-
-		});
-
-		this.add(myBtAdd);
-
-		Object[] myObj = {"n°Exempl.","ISBN","Titre","Auteur"};
-		myTableModel = new DefaultTableModel(myObj, 0) {
 			
+		});
+		
+		this.add(myBtAdd);
+		
+		Object[] myObj={"Nom","Prénom"};
+		myTableModel=new DefaultTableModel(myObj,0){
+		
 			private static final long serialVersionUID = 1L;
 
-			public boolean isCellEditable(int row, int col) {
+			public boolean isCellEditable(int row, int col){
 				return false;
 			}
 		};
-
-		DefaultTableCellRenderer txtCellCenter = new DefaultTableCellRenderer();
+		
+		DefaultTableCellRenderer txtCellCenter=new DefaultTableCellRenderer();
 		txtCellCenter.setHorizontalAlignment(JLabel.CENTER);
 		
-		JTable myTable = new JTable(myTableModel){
-			 
+		JTable myTable=new JTable(myTableModel){
+		
 			private static final long serialVersionUID = 1L;
 
 			public Component prepareRenderer(TableCellRenderer renderer, int index_row, int index_col) {
@@ -78,8 +87,6 @@ public class ReparationPanel extends JPanel{
 		DefaultTableColumnModel column=(DefaultTableColumnModel) myTable.getColumnModel();
 		column.getColumn(0).setCellRenderer(txtCellCenter);
 		column.getColumn(1).setCellRenderer(txtCellCenter);
-		column.getColumn(2).setCellRenderer(txtCellCenter);
-		column.getColumn(3).setCellRenderer(txtCellCenter);
 		
 		myTable.setOpaque(false);
 		
@@ -88,34 +95,72 @@ public class ReparationPanel extends JPanel{
 		
 		myTable.setGridColor(new Color(220,220,220));
 		
-		JScrollPane myScrollPane = new JScrollPane(myTable);
+		JScrollPane myScrollPane=new JScrollPane(myTable);
 		myScrollPane.setBounds(10, 40, 847, 637);
 		myScrollPane.setOpaque(false);
 		myScrollPane.getViewport().setOpaque(false);
 		myScrollPane.setBorder(BorderFactory.createLineBorder(new Color(220,220,220)));
-
+		
 		this.add(myScrollPane);
+		
+		JButton myBtEdit=new JButton();
+		myBtEdit.setBounds(867, 100, 121, 29);
+		myBtEdit.setText("Editer");
+		myBtEdit.addActionListener(new ActionListener(){
 
-		JButton myBtRemove = new JButton();
-		myBtRemove.setBounds(867, 100, 121, 29);
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+			
+		});
+		
+		this.add(myBtEdit);
+		
+		JButton myBtRemove=new JButton();
+		myBtRemove.setBounds(867, 140, 121, 29);
 		myBtRemove.setText("Supprimer");
-		myBtRemove.addActionListener(new ActionListener() {
+		myBtRemove.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				/*
-				if(myTableCategorie.getSelectedRow()!=-1){
-					String oldName=(String) myTableModelCategorie.getValueAt(myTableCategorie.getSelectedRow(), 0);
-					
-				}
-				*/
+				
 			}
-
+			
 		});
-
-		this.add(myBtRemove);
-
-		// init data
-		//ArrayList<Exemplaire> myarray=new ArrayList<Exemplaire>();
 		
+		this.add(myBtRemove);
+		
+		JLabel myLblEmpruntMax=new JLabel();
+		myLblEmpruntMax.setText("<html><center>"+"Nombre"+"<br>"+"Emprunts"+"<br>"+"Maximum"+"</center></html>");
+		myLblEmpruntMax.setHorizontalAlignment(JLabel.CENTER);
+		myLblEmpruntMax.setBounds(867, 551, 121, 50);
+		
+		this.add(myLblEmpruntMax);
+		
+		myTxtFieldEmpruntMax.setHorizontalAlignment(JTextField.CENTER);
+		myTxtFieldEmpruntMax.setBounds(906, 609, 50, 30);
+		
+		this.add(myTxtFieldEmpruntMax);
+		
+		JButton myBtEditEmpruntMax=new JButton();
+		myBtEditEmpruntMax.setText("Editer");
+		myBtEditEmpruntMax.setBounds(867, 649, 121, 29);
+		
+		this.add(myBtEditEmpruntMax);
+		
+		//init data
+		ArrayList<Adherent> myarray=new ArrayList<Adherent>();
+		myarray=controller.getAll();
+		for(int i=0;i<myarray.size();i++) {			
+			if(i==0) {
+				myTxtFieldEmpruntMax.setText(Integer.toString(myarray.get(i).getNb_emprunt_max()));
+			}else {
+				String nom=myarray.get(i).getNom_personne();
+				String prenom=myarray.get(i).getPrenom_personne();
+				
+				Object[] myobj= {nom, prenom};
+				myTableModel.addRow(myobj);
+			}
+		}
 	}
 }

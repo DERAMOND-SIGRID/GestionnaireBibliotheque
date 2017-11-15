@@ -18,4 +18,6 @@ public interface IServiceAdherent {
 	
 	public void remove(int id_adherent);
 	
+	public boolean isLinkedToExemplaire(int id_adherent);
+	
 }

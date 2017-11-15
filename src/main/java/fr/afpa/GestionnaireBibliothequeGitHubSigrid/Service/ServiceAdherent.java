@@ -2,17 +2,21 @@ package fr.afpa.GestionnaireBibliothequeGitHubSigrid.Service;
 
 import java.util.ArrayList;
 
-import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO.DAOAdherent;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO.IDAOAdherent;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO.IDAOExemplaire;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Adherent;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Exemplaire;
 
 public class ServiceAdherent implements IServiceAdherent {
 
-	private DAOAdherent daoAd;
+	private IDAOAdherent daoAd;
+	private IDAOExemplaire daoE;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
 
-	public ServiceAdherent(DAOAdherent daoadherent) {
+	public ServiceAdherent(IDAOAdherent daoadherent,IDAOExemplaire daoexemplaire) {
 		this.daoAd = daoadherent;
+		this.daoE=daoexemplaire;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,4 +61,19 @@ public class ServiceAdherent implements IServiceAdherent {
 		daoAd.remove(id_adherent);
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public boolean isLinkedToExemplaire(int id_adherent) {
+		boolean isLinked=false;
+		
+		ArrayList<Exemplaire> myarray=daoE.getAll();
+		for(int i=0;i<myarray.size();i++) {
+			if(myarray.get(i).getAdherent().getId_adherent()==id_adherent) {
+				isLinked=true;
+			}
+		}
+		
+		return isLinked;
+	}
+	
 }

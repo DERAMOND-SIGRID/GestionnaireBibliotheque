@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,20 +17,22 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Controller.ControllerLivre;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Livre;
 
-public class AuteurPanel extends JPanel{
+public class PanelLivre extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private DefaultTableModel myTableModel;
 	
-	public AuteurPanel(){
+	public PanelLivre(ControllerLivre controller){
 		this.setOpaque(false);
 		this.setLayout(null);
 		
 		JLabel myLbl=new JLabel();
 		myLbl.setBounds(0, 0, 997, 30);
-		myLbl.setText("Auteurs");
+		myLbl.setText("Livres");
 		myLbl.setHorizontalAlignment(JLabel.CENTER);
 		
 		this.add(myLbl);
@@ -47,7 +50,7 @@ public class AuteurPanel extends JPanel{
 		
 		this.add(myBtAdd);
 		
-		Object[] myObj={"Nom","Prénom","Date de Naissance"};
+		Object[] myObj={"ISBN","Titre","Sous Titre","Auteur","Catégorie","Disponibilité"};
 		myTableModel=new DefaultTableModel(myObj,0){
 		
 			private static final long serialVersionUID = 1L;
@@ -80,6 +83,9 @@ public class AuteurPanel extends JPanel{
 		column.getColumn(0).setCellRenderer(txtCellCenter);
 		column.getColumn(1).setCellRenderer(txtCellCenter);
 		column.getColumn(2).setCellRenderer(txtCellCenter);
+		column.getColumn(3).setCellRenderer(txtCellCenter);
+		column.getColumn(4).setCellRenderer(txtCellCenter);
+		column.getColumn(5).setCellRenderer(txtCellCenter);
 		
 		myTable.setOpaque(false);
 		
@@ -123,9 +129,72 @@ public class AuteurPanel extends JPanel{
 		
 		this.add(myBtRemove);
 		
-		//init data
-		//ArrayList<Auteur> myarray=new ArrayList<Auteur>();
+		JButton myBtListExemplaire=new JButton();
+		myBtListExemplaire.setBounds(867, 509, 121, 49);
+		myBtListExemplaire.setText("<html><center>"+"Liste"+"<br>"+"Exemplaires"+"</center></html>");
+		myBtListExemplaire.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+			
+		});
 		
+		this.add(myBtListExemplaire);
+		
+		JButton myBtAddExemplaire=new JButton();
+		myBtAddExemplaire.setBounds(867, 569, 121, 49);
+		myBtAddExemplaire.setText("<html><center>"+"Ajouter"+"<br>"+"Exemplaire"+"</center></html>");
+		myBtAddExemplaire.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+			
+		});
+		
+		this.add(myBtAddExemplaire);
+		
+		JButton myBtRemoveExemplaire=new JButton();
+		myBtRemoveExemplaire.setBounds(867, 629, 121, 49);
+		myBtRemoveExemplaire.setText("<html><center>"+"Supprimer"+"<br>"+"Exemplaire"+"</center></html>");
+		myBtRemoveExemplaire.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+			
+		});
+		
+		this.add(myBtRemoveExemplaire);
+		
+		//init data
+		ArrayList<Livre> myarray=new ArrayList<Livre>();
+		myarray=controller.getAll();
+		for(int i=0;i<myarray.size();i++) {
+			long isbn=myarray.get(i).getIsbn();
+			String titre=myarray.get(i).getTitre();
+			String Stitre="";
+			if(myarray.get(i).getSous_titre()!=null) {
+				Stitre=myarray.get(i).getSous_titre();
+			}
+			String nomAu=myarray.get(i).getAuteur().getNom_personne();
+			String prenomAu=myarray.get(i).getAuteur().getPrenom_personne();
+			
+			String nomC="";
+			if(myarray.get(i).getCategorie()!=null) {
+				nomC=myarray.get(i).getCategorie().getNom_categorie();
+			}
+			boolean isDispo=myarray.get(i).isEst_dispo();
+			String disponibilite="indisponible";
+			if(isDispo==true) {
+				disponibilite="disponible";
+			}
+				
+				Object[] myobj= {isbn, titre, Stitre, nomAu+" "+prenomAu, nomC,disponibilite };
+			
+			myTableModel.addRow(myobj);
+		}
 		
 	}
 }

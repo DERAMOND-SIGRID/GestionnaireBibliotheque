@@ -10,9 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MainFrame extends JFrame {
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Controller.ControllerManager;
+
+public class FrameMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
+	private ControllerManager ca;
 	
 	private JPanel myMenu;
 	private JPanel myDesktop;
@@ -27,7 +31,9 @@ public class MainFrame extends JFrame {
 
 	//////////////////////////////////////////////////////
 
-	public MainFrame() {
+	public FrameMain(ControllerManager controller) {
+		this.ca=controller;
+		
 		this.setTitle("Gestionnaire de Bibliothèque");
 		this.setSize(1024, 768);
 		this.setResizable(false);
@@ -72,6 +78,10 @@ public class MainFrame extends JFrame {
 				myBtAdherent.setEnabled(true);
 				myBtEmprunt.setEnabled(true);
 				myBtReparation.setEnabled(true);
+				
+				ca.clear();
+				
+				ca.accueil();
 			}
 			
 		});
@@ -90,6 +100,10 @@ public class MainFrame extends JFrame {
 				myBtAdherent.setEnabled(true);
 				myBtEmprunt.setEnabled(true);
 				myBtReparation.setEnabled(true);
+				
+				ca.clear();
+				
+				ca.categorie();
 			}
 			
 		});
@@ -108,6 +122,10 @@ public class MainFrame extends JFrame {
 				myBtAdherent.setEnabled(true);
 				myBtEmprunt.setEnabled(true);
 				myBtReparation.setEnabled(true);
+				
+				ca.clear();
+				
+				ca.auteur();
 			}
 			
 		});
@@ -126,6 +144,10 @@ public class MainFrame extends JFrame {
 				myBtAdherent.setEnabled(true);
 				myBtEmprunt.setEnabled(true);
 				myBtReparation.setEnabled(true);
+				
+				ca.clear();
+				
+				ca.livre();
 			}
 			
 		});
@@ -144,6 +166,10 @@ public class MainFrame extends JFrame {
 				myBtAdherent.setEnabled(false);
 				myBtEmprunt.setEnabled(true);
 				myBtReparation.setEnabled(true);
+				
+				ca.clear();
+				
+				ca.adherent();
 			}
 			
 		});
@@ -162,6 +188,10 @@ public class MainFrame extends JFrame {
 				myBtAdherent.setEnabled(true);
 				myBtEmprunt.setEnabled(false);
 				myBtReparation.setEnabled(true);
+				
+				ca.clear();
+				
+				ca.emprunt();
 			}
 			
 		});
@@ -180,6 +210,10 @@ public class MainFrame extends JFrame {
 				myBtAdherent.setEnabled(true);
 				myBtEmprunt.setEnabled(true);
 				myBtReparation.setEnabled(false);
+				
+				ca.clear();
+				
+				ca.reparation();
 			}
 			
 		});

@@ -6,11 +6,11 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class AccueilPanel extends JPanel {
+public class PanelAccueil extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public AccueilPanel() {
+	public PanelAccueil() {
 		this.setOpaque(false);
 		this.setLayout(null);
 

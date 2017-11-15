@@ -2,17 +2,21 @@ package fr.afpa.GestionnaireBibliothequeGitHubSigrid.Service;
 
 import java.util.ArrayList;
 
-import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO.DAOCategorie;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO.IDAOCategorie;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO.IDAOLivre;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Categorie;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Livre;
 
 public class ServiceCategorie implements IServiceCategorie {
 
-	private DAOCategorie daoC;
+	private IDAOCategorie daoC;
+	private IDAOLivre daoL;
 
 	////////////////////////////////////////////////////////////////
 
-	public ServiceCategorie(DAOCategorie daocategorie) {
+	public ServiceCategorie(IDAOCategorie daocategorie, IDAOLivre daolivre) {
 		this.daoC = daocategorie;
+		this.daoL = daolivre;
 	}
 
 	////////////////////////////////////////////////////////////////
@@ -55,6 +59,21 @@ public class ServiceCategorie implements IServiceCategorie {
 
 	public void remove(int id_categorie) {
 		daoC.remove(id_categorie);
+	}
+
+	////////////////////////////////////////////////////////////////
+
+	public boolean isLinkedToLivre(int id_categorie) {
+		boolean isLinked=false;
+		
+		ArrayList<Livre> myarray=daoL.getAll();
+		for(int i=0;i<myarray.size();i++) {
+			if(myarray.get(i).getCategorie()!=null && id_categorie==myarray.get(i).getCategorie().getId_categorie()) {
+				isLinked=true;
+			}
+		}
+		
+		return isLinked;
 	}
 
 }

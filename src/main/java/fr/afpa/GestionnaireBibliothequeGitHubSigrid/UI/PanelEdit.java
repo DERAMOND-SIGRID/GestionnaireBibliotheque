@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class EditPanel extends JPanel {
+public class PanelEdit extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -60,7 +60,7 @@ public class EditPanel extends JPanel {
 
 	////////////////////////////////////////////////////////////////////////
 	
-	public EditPanel() {
+	public PanelEdit() {
 		this.setOpaque(false);
 		this.setLayout(null);
 

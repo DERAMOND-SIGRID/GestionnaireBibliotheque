@@ -16,24 +16,24 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class LivrePanel extends JPanel{
+public class PanelReparation extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
 	private DefaultTableModel myTableModel;
 	
-	public LivrePanel(){
+	public PanelReparation(){
 		this.setOpaque(false);
 		this.setLayout(null);
-		
-		JLabel myLbl=new JLabel();
+
+		JLabel myLbl = new JLabel();
 		myLbl.setBounds(0, 0, 997, 30);
-		myLbl.setText("Livres");
+		myLbl.setText("Réparations");
 		myLbl.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		this.add(myLbl);
-		
-		JButton myBtAdd=new JButton();
+
+		JButton myBtAdd = new JButton();
 		myBtAdd.setBounds(867, 60, 121, 29);
 		myBtAdd.setText("Ajouter");
 		myBtAdd.addActionListener(new ActionListener() {
@@ -41,26 +41,26 @@ public class LivrePanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				
 			}
-			
+
 		});
-		
+
 		this.add(myBtAdd);
-		
-		Object[] myObj={"ISBN","Titre","Sous Titre","Auteur","Catégorie","Disponibilité"};
-		myTableModel=new DefaultTableModel(myObj,0){
-		
+
+		Object[] myObj = {"n°Exempl.","ISBN","Titre","Auteur"};
+		myTableModel = new DefaultTableModel(myObj, 0) {
+			
 			private static final long serialVersionUID = 1L;
 
-			public boolean isCellEditable(int row, int col){
+			public boolean isCellEditable(int row, int col) {
 				return false;
 			}
 		};
-		
-		DefaultTableCellRenderer txtCellCenter=new DefaultTableCellRenderer();
+
+		DefaultTableCellRenderer txtCellCenter = new DefaultTableCellRenderer();
 		txtCellCenter.setHorizontalAlignment(JLabel.CENTER);
 		
-		JTable myTable=new JTable(myTableModel){
-		
+		JTable myTable = new JTable(myTableModel){
+			 
 			private static final long serialVersionUID = 1L;
 
 			public Component prepareRenderer(TableCellRenderer renderer, int index_row, int index_col) {
@@ -80,8 +80,6 @@ public class LivrePanel extends JPanel{
 		column.getColumn(1).setCellRenderer(txtCellCenter);
 		column.getColumn(2).setCellRenderer(txtCellCenter);
 		column.getColumn(3).setCellRenderer(txtCellCenter);
-		column.getColumn(4).setCellRenderer(txtCellCenter);
-		column.getColumn(5).setCellRenderer(txtCellCenter);
 		
 		myTable.setOpaque(false);
 		
@@ -90,81 +88,34 @@ public class LivrePanel extends JPanel{
 		
 		myTable.setGridColor(new Color(220,220,220));
 		
-		JScrollPane myScrollPane=new JScrollPane(myTable);
+		JScrollPane myScrollPane = new JScrollPane(myTable);
 		myScrollPane.setBounds(10, 40, 847, 637);
 		myScrollPane.setOpaque(false);
 		myScrollPane.getViewport().setOpaque(false);
 		myScrollPane.setBorder(BorderFactory.createLineBorder(new Color(220,220,220)));
-		
+
 		this.add(myScrollPane);
-		
-		JButton myBtEdit=new JButton();
-		myBtEdit.setBounds(867, 100, 121, 29);
-		myBtEdit.setText("Editer");
-		myBtEdit.addActionListener(new ActionListener(){
 
-			public void actionPerformed(ActionEvent arg0) {
-				
-				
-			}
-			
-		});
-		
-		this.add(myBtEdit);
-		
-		JButton myBtRemove=new JButton();
-		myBtRemove.setBounds(867, 140, 121, 29);
+		JButton myBtRemove = new JButton();
+		myBtRemove.setBounds(867, 100, 121, 29);
 		myBtRemove.setText("Supprimer");
-		myBtRemove.addActionListener(new ActionListener(){
+		myBtRemove.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+				/*
+				if(myTableCategorie.getSelectedRow()!=-1){
+					String oldName=(String) myTableModelCategorie.getValueAt(myTableCategorie.getSelectedRow(), 0);
+					
+				}
+				*/
 			}
-			
+
 		});
-		
+
 		this.add(myBtRemove);
-		
-		JButton myBtListExemplaire=new JButton();
-		myBtListExemplaire.setBounds(867, 509, 121, 49);
-		myBtListExemplaire.setText("<html><center>"+"Liste"+"<br>"+"Exemplaires"+"</center></html>");
-		myBtListExemplaire.addActionListener(new ActionListener(){
 
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-			
-		});
+		// init data
+		//ArrayList<Exemplaire> myarray=new ArrayList<Exemplaire>();
 		
-		this.add(myBtListExemplaire);
-		
-		JButton myBtAddExemplaire=new JButton();
-		myBtAddExemplaire.setBounds(867, 569, 121, 49);
-		myBtAddExemplaire.setText("<html><center>"+"Ajouter"+"<br>"+"Exemplaire"+"</center></html>");
-		myBtAddExemplaire.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-			
-		});
-		
-		this.add(myBtAddExemplaire);
-		
-		JButton myBtRemoveExemplaire=new JButton();
-		myBtRemoveExemplaire.setBounds(867, 629, 121, 49);
-		myBtRemoveExemplaire.setText("<html><center>"+"Supprimer"+"<br>"+"Exemplaire"+"</center></html>");
-		myBtRemoveExemplaire.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-			
-		});
-		
-		this.add(myBtRemoveExemplaire);
-		
-		//init data
-		//ArrayList<Livre> myarray=new ArrayList<Livre>();
 	}
 }

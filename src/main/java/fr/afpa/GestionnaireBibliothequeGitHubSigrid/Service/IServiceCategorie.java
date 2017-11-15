@@ -18,4 +18,6 @@ public interface IServiceCategorie {
 	
 	public void remove(int id_categorie);
 	
+	public boolean isLinkedToLivre(int id_categorie);
+	
 }
