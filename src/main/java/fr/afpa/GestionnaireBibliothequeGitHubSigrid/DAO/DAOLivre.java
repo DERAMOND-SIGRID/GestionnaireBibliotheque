@@ -20,7 +20,7 @@ public class DAOLivre implements IDAOLivre{
 
 	/////////////////////////////////////////////////////////////////
 
-	public void connect() {
+	private void connect() {
 		myconnect = ConnectToBDD.getConnectToBDD();
 
 		try {
@@ -32,7 +32,7 @@ public class DAOLivre implements IDAOLivre{
 
 	/////////////////////////////////////////////////////////////////
 
-	public void disconnect() {
+	private void disconnect() {
 		try {
 			if (myresult != null) {
 				myresult.close();

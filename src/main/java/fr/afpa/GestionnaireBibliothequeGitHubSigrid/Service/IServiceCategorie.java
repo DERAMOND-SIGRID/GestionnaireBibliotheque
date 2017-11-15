@@ -1,10 +1,10 @@
-package fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO;
+package fr.afpa.GestionnaireBibliothequeGitHubSigrid.Service;
 
 import java.util.ArrayList;
 
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Categorie;
 
-public interface IDAOCategorie {
+public interface IServiceCategorie {
 
 	public ArrayList<Categorie> getAll();
 	
