@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,13 +17,16 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Controller.ControllerReparation;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Exemplaire;
+
 public class PanelReparation extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
 	private DefaultTableModel myTableModel;
 	
-	public PanelReparation(){
+	public PanelReparation(ControllerReparation controller){
 		this.setOpaque(false);
 		this.setLayout(null);
 
@@ -115,7 +119,20 @@ public class PanelReparation extends JPanel{
 		this.add(myBtRemove);
 
 		// init data
-		//ArrayList<Exemplaire> myarray=new ArrayList<Exemplaire>();
+		
+		ArrayList<Exemplaire> myarray=new ArrayList<Exemplaire>();
+		myarray=controller.getAll();
+		
+		for(int i=0;i<myarray.size();i++){
+			int numEx=myarray.get(i).getId_exemplaire();
+			long isbn=myarray.get(i).getLivre().getIsbn();
+			String titre=myarray.get(i).getLivre().getTitre();
+			String nomAu=myarray.get(i).getLivre().getAuteur().getNom_personne();
+			String prenomAu=myarray.get(i).getLivre().getAuteur().getPrenom_personne();
+			
+			Object[] myobj={numEx, isbn, titre, nomAu+" "+prenomAu};
+			myTableModel.addRow(myobj);
+		}
 		
 	}
 }
