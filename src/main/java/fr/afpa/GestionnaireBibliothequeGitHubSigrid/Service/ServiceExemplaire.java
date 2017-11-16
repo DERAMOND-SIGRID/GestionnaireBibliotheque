@@ -2,16 +2,16 @@ package fr.afpa.GestionnaireBibliothequeGitHubSigrid.Service;
 
 import java.util.ArrayList;
 
-import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO.DAOExemplaire;
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.DAO.IDAOExemplaire;
 import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Model.Exemplaire;
 
 public class ServiceExemplaire implements IServiceExemplaire {
 
-	private DAOExemplaire daoE;
+	private IDAOExemplaire daoE;
 
 	////////////////////////////////////////////////////////////////////////
 
-	public ServiceExemplaire(DAOExemplaire daoexemplaire) {
+	public ServiceExemplaire(IDAOExemplaire daoexemplaire) {
 		this.daoE = daoexemplaire;
 	}
 

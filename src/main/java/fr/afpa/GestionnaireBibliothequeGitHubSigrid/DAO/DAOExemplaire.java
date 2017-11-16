@@ -107,7 +107,7 @@ public class DAOExemplaire implements IDAOExemplaire {
 				
 				myadherent=new Adherent(idAdP, nomAdP, prenomAdP, idAd, nbEmpruntMax);
 
-				String strIsInRepair="";
+				String strIsInRepair=myresult.getString("is_in_repair");
 				boolean isInRepair=false;
 				if("1".equals(strIsInRepair)) {
 					isInRepair=true;
