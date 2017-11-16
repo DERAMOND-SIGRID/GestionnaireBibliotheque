@@ -14,34 +14,6 @@ public class PanelPopup extends JPanel {
 	private JLabel myLbl;
 
 	public PanelPopup() {
-		initPanel();
-		
-		/*
-		TimerTask myTask = null;
-
-		if ("categorie".equals("event")) {
-			myLbl.setText("Désolé, cette catégorie est liée à des livres!");
-
-			// timer task
-			myTask = new TimerTask() {
-
-				@Override
-				public void run() {
-
-				}
-
-			};
-
-		}
-
-		Timer myTimer = new Timer();
-		myTimer.schedule(myTask, 3000);
-		*/
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	private void initPanel() {
 		this.setOpaque(false);
 		this.setLayout(null);
 
@@ -53,6 +25,11 @@ public class PanelPopup extends JPanel {
 		myLbl.setHorizontalAlignment(JLabel.CENTER);
 
 		this.add(myLbl);
+		
 	}
 
+	public JLabel getLbl() {
+		return myLbl;
+	}
+	
 }
