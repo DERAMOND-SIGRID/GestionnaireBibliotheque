@@ -223,6 +223,10 @@ public class FrameMain extends JFrame {
 	
 	//////////////////////////////////////////////////////
 
+	public JPanel getMenuContainer() {
+		return myMenu;
+	}
+	
 	public JPanel getDesktopContainer() {
 		return myDesktop;
 	}

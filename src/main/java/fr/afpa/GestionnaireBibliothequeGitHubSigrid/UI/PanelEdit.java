@@ -3,6 +3,8 @@ package fr.afpa.GestionnaireBibliothequeGitHubSigrid.UI;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListCellRenderer;
@@ -12,9 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import fr.afpa.GestionnaireBibliothequeGitHubSigrid.Controller.ControllerEdit;
+
 public class PanelEdit extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	
+	private ControllerEdit ced;
 
 	private JLabel myLblCategorie;
 	private JTextField myTxtCategorie;
@@ -50,17 +56,101 @@ public class PanelEdit extends JPanel {
 	private JLabel myLblARepair;
 	private JComboBox<Object> myComboBoxRepairL;
 	private JComboBox<Object> myComboBoxRepairE;
-	
+
 	private JLabel myLblRRepair;
 	private JTextField myTxtRepairL;
 	private JTextField myTxtRepairE;
 
 	private JButton myBtValider;
+	private JButton myBtCancel;
 	private JLabel myLblPopup;
+	
+	private int id;
 
 	////////////////////////////////////////////////////////////////////////
+
+	public PanelEdit(ControllerEdit controller, String event) {
+		this.ced=controller;
+		
+		initPanel();
+		
+		// init txtField in function of the event
+		if("addCategorie".equals(event)){
+			initTextFieldCategorie();
+			
+			myLblCategorie.setText("Ajouter la catégorie :");
+			myTxtCategorie.setText("Entrez une catégorie ex: roman bd manga");
+			
+			myBtValider.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					String nomC=myTxtCategorie.getText();
+					ced.addCategorie(nomC);
+				}
+			});
+			
+			myBtCancel.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					ced.categorie();
+				}
+			});
+		}
+		
+	}
+
+	public PanelEdit(ControllerEdit controller, String event, int id) {
+		this.ced=controller;
+		
+		this.id=id;
+		
+		initPanel();
+		
+		// init txtField in function of the event
+		if("editCategorie".equals(event)){
+			initTextFieldCategorie();
+			
+			myLblCategorie.setText("Editer la catégorie :");
+			
+			myBtValider.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					String nomC=myTxtCategorie.getText();
+					ced.editCategorie(PanelEdit.this.id,nomC);
+				}
+			});
+			
+			myBtCancel.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					ced.categorie();
+				}
+			});
+		}
+		if("removeCategorie".equals(event)){
+			initTextFieldCategorie();
+			
+			myLblCategorie.setText("Supprimer la catégorie :");
+			
+			myBtValider.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					ced.removeCategorie(PanelEdit.this.id);
+				}
+			});
+			
+			myBtCancel.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					ced.categorie();
+				}
+			});
+		}
+	}
 	
-	public PanelEdit() {
+	////////////////////////////////////////////////////////////////////////
+
+	private void initPanel(){
 		this.setOpaque(false);
 		this.setLayout(null);
 
@@ -76,27 +166,18 @@ public class PanelEdit extends JPanel {
 
 		this.add(myLblPopup);
 
-		JButton myBtCancel = new JButton();
+		myBtCancel = new JButton();
 		myBtCancel.setBounds(867, 350, 121, 29);
 		myBtCancel.setText("Annuler");
-		myBtCancel.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
 
 		this.add(myBtCancel);
 
-		//init txtField in function of the event
-
 	}
-
-	////////////////////////////////////////////////////////////////////////
 	
+	////////////////////////////////////////////////////////////////////////
+
 	private void initTextFieldCategorie() {
 		this.myLblCategorie = new JLabel();
-		myLblCategorie.setText("Add / Edit / Remove Catégorie :");
 		myLblCategorie.setBounds(10, 270, 978, 30);
 		myLblCategorie.setHorizontalAlignment(JLabel.CENTER);
 
@@ -105,13 +186,40 @@ public class PanelEdit extends JPanel {
 		myTxtCategorie = new JTextField();
 		myTxtCategorie.setBounds(10, 310, 847, 30);
 		myTxtCategorie.setHorizontalAlignment(JTextField.CENTER);
-		myTxtCategorie.setText("Entrez une catégorie ex: roman bd manga");
+		myTxtCategorie.addMouseListener(new MouseListener(){
+
+			public void mouseClicked(MouseEvent arg0) {
+				myLblPopup.setText("");
+				
+			}
+
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 
 		this.add(myTxtCategorie);
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	
+
 	private void initTextFieldAuteur() {
 		this.myLblAuteur = new JLabel();
 		myLblAuteur.setText("Add / Edit / Remove Auteur :");
@@ -157,7 +265,7 @@ public class PanelEdit extends JPanel {
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	
+
 	private void initTextFieldLivre() {
 		this.myLblLivre = new JLabel();
 		myLblLivre.setText("Add / Edit / Remove Livre :");
@@ -211,7 +319,7 @@ public class PanelEdit extends JPanel {
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	
+
 	private void initTextFieldAdherent() {
 		this.myLblAdherent = new JLabel();
 		myLblAdherent.setText("Add / Edit / Remove Adhérent :");
@@ -236,7 +344,7 @@ public class PanelEdit extends JPanel {
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	
+
 	private void initTextFielAddEmprunt() {
 		this.myLblAEmprunt = new JLabel();
 		myLblAEmprunt.setText("Add Emprunt :");
@@ -284,7 +392,7 @@ public class PanelEdit extends JPanel {
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	
+
 	private void initTextFielRemoveEmprunt() {
 		this.myLblREmprunt = new JLabel();
 		myLblREmprunt.setText("Remove Emprunt :");
@@ -322,7 +430,7 @@ public class PanelEdit extends JPanel {
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	
+
 	private void initTextFielAddRepair() {
 		this.myLblARepair = new JLabel();
 		myLblARepair.setText("Add Réparation :");
@@ -359,7 +467,7 @@ public class PanelEdit extends JPanel {
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	
+
 	private void initTextFielRemoveRepair() {
 		this.myLblRRepair = new JLabel();
 		myLblRRepair.setText("Remove Réparation :");
@@ -386,4 +494,15 @@ public class PanelEdit extends JPanel {
 
 		this.add(myTxtRepairE);
 	}
+	
+	////////////////////////////////////////////////////////////////////////
+	
+	public JLabel getLblPopup() {
+		return myLblPopup;
+	}
+
+	public JTextField getTxtCategorie() {
+		return myTxtCategorie;
+	}
+	
 }

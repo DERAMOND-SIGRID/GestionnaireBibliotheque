@@ -24,9 +24,13 @@ public class PanelCategorie extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
+	private ControllerCategorie cc;
 	private DefaultTableModel myTableModel;
+	private JTable myTable;
 	
 	public PanelCategorie(ControllerCategorie controller){
+		this.cc=controller;
+		
 		this.setOpaque(false);
 		this.setLayout(null);
 
@@ -43,7 +47,7 @@ public class PanelCategorie extends JPanel{
 		myBtAdd.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+				cc.add();
 			}
 
 		});
@@ -63,7 +67,7 @@ public class PanelCategorie extends JPanel{
 		DefaultTableCellRenderer txtCellCenter = new DefaultTableCellRenderer();
 		txtCellCenter.setHorizontalAlignment(JLabel.CENTER);
 		
-		JTable myTable = new JTable(myTableModel){
+		myTable = new JTable(myTableModel){
 			 
 			private static final long serialVersionUID = 1L;
 
@@ -103,12 +107,12 @@ public class PanelCategorie extends JPanel{
 		myBtEdit.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				/*
-				if(myTableCategorie.getSelectedRow()!=-1){
-					String oldName=(String) myTableModelCategorie.getValueAt(myTableCategorie.getSelectedRow(), 0);
-					
+			
+				if(!myTable.getSelectionModel().isSelectionEmpty()){
+					String oldName=(String) myTableModel.getValueAt(myTable.getSelectedRow(), 0);
+				
+					cc.edit(oldName);
 				}
-				*/
 			}
 		});
 
@@ -120,12 +124,12 @@ public class PanelCategorie extends JPanel{
 		myBtRemove.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				/*
-				if(myTableCategorie.getSelectedRow()!=-1){
-					String oldName=(String) myTableModelCategorie.getValueAt(myTableCategorie.getSelectedRow(), 0);
-					
+				
+				if(!myTable.getSelectionModel().isSelectionEmpty()){
+					String oldName=(String) myTableModel.getValueAt(myTable.getSelectedRow(), 0);
+				
+					cc.remove(oldName);
 				}
-				*/
 			}
 
 		});
