@@ -96,6 +96,35 @@ public class PanelEdit extends JPanel {
 				}
 			});
 		}
+		if("addAuteur".equals(event)){
+			initTextFieldAuteur();
+			
+			myLblAuteur.setText("Ajouter l'auteur :");
+			
+			myTxtNomAuteur.setText("Nom");
+			myTxtPrenomAuteur.setText("Prénom");
+			myTxtJJAuteur.setText("JJ");
+			myTxtMMAuteur.setText("MM");
+			myTxtAAAAAuteur.setText("AAAA");
+			
+			myBtValider.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					String nom="";
+					String prenom="";
+					String dateN="";
+					
+					ced.addAuteur(nom, prenom, dateN);
+				}
+			});
+			
+			myBtCancel.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					ced.auteur();
+				}
+			});
+		}
 		
 	}
 
@@ -222,7 +251,6 @@ public class PanelEdit extends JPanel {
 
 	private void initTextFieldAuteur() {
 		this.myLblAuteur = new JLabel();
-		myLblAuteur.setText("Add / Edit / Remove Auteur :");
 		myLblAuteur.setBounds(10, 270, 978, 30);
 		myLblAuteur.setHorizontalAlignment(JLabel.CENTER);
 
@@ -231,35 +259,30 @@ public class PanelEdit extends JPanel {
 		myTxtNomAuteur = new JTextField();
 		myTxtNomAuteur.setBounds(10, 310, 328, 30);
 		myTxtNomAuteur.setHorizontalAlignment(JTextField.CENTER);
-		myTxtNomAuteur.setText("Nom");
 
 		this.add(myTxtNomAuteur);
 
 		myTxtPrenomAuteur = new JTextField();
 		myTxtPrenomAuteur.setBounds(349, 310, 328, 30);
 		myTxtPrenomAuteur.setHorizontalAlignment(JTextField.CENTER);
-		myTxtPrenomAuteur.setText("Prénom");
 
 		this.add(myTxtPrenomAuteur);
 
 		myTxtJJAuteur = new JTextField();
 		myTxtJJAuteur.setBounds(687, 310, 50, 30);
 		myTxtJJAuteur.setHorizontalAlignment(JTextField.CENTER);
-		myTxtJJAuteur.setText("JJ");
 
 		this.add(myTxtJJAuteur);
 
 		myTxtMMAuteur = new JTextField();
 		myTxtMMAuteur.setBounds(747, 310, 50, 30);
 		myTxtMMAuteur.setHorizontalAlignment(JTextField.CENTER);
-		myTxtMMAuteur.setText("MM");
 
 		this.add(myTxtMMAuteur);
 
 		myTxtAAAAAuteur = new JTextField();
 		myTxtAAAAAuteur.setBounds(807, 310, 50, 30);
 		myTxtAAAAAuteur.setHorizontalAlignment(JTextField.CENTER);
-		myTxtAAAAAuteur.setText("AAAA");
 
 		this.add(myTxtAAAAAuteur);
 	}

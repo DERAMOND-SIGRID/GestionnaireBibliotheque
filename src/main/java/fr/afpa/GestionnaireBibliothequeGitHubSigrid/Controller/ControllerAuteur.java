@@ -11,9 +11,14 @@ import fr.afpa.GestionnaireBibliothequeGitHubSigrid.UI.PanelAuteur;
 
 public class ControllerAuteur {
 
+	private ControllerManager cm;
 	private ServiceAuteur sau;
 	
+	/////////////////////////////////////////////////////////////////////////////
+	
 	public ControllerAuteur(ControllerManager controller,FrameMain frame) {
+		this.cm = controller;
+		
 		DAOAuteur daoau=new DAOAuteur();
 		DAOLivre daol=new DAOLivre();
 		
@@ -25,9 +30,20 @@ public class ControllerAuteur {
 		frame.getDesktopContainer().updateUI();
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////
+	
 	public ArrayList<Auteur> getAll(){
 		ArrayList<Auteur> myarray=sau.getAll();
 		
 		return myarray;
 	}
+	
+	/////////////////////////////////////////////////////////////////////////////
+	
+	public void add() {
+		cm.clear();
+
+		cm.edit("addAuteur");
+	}
+	
 }

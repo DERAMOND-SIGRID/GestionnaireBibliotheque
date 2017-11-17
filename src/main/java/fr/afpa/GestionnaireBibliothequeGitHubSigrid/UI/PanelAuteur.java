@@ -25,9 +25,12 @@ public class PanelAuteur extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
+	private ControllerAuteur cau;
 	private DefaultTableModel myTableModel;
 	
 	public PanelAuteur(ControllerAuteur controller){
+		this.cau=controller;
+		
 		this.setOpaque(false);
 		this.setLayout(null);
 		
@@ -44,7 +47,7 @@ public class PanelAuteur extends JPanel{
 		myBtAdd.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+				cau.add();
 			}
 			
 		});
